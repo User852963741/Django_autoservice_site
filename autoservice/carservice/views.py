@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
+from django.utils.translation import gettext as _
 
 
 def index(request):
@@ -36,7 +37,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f"Profilis atnaujintas")
+            messages.success(request, _("Profilis atnaujintas"))
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -58,19 +59,19 @@ def register(request):
         password2 = request.POST.get('password2')
         error = False
         if not password or password != password2 :
-            messages.error(request, 'Slaptaodziai nesutampa arba neivesti')
+            messages.error(request, _('Slaptaodziai nesutampa arba neivesti'))
             error = True
         if User.objects.filter(username=username).exists():
-            messages.error(request, f'Vartotojas {username} jau egzistuoja')
+            messages.error(request, _('Vartotojas {} jau egzistuoja').format(username))
             error = True
         if User.objects.filter(email=email).exists():
-            messages.error(request, f'El pastas {email} jau egzistuoja')
+            messages.error(request, _('El pastas {} jau egzistuoja').format(email))
             error = True
         if error:
             return redirect('register')
         else:
             User.objects.create_user(username=username, email=email, password=password)
-            messages.success(request, f'Vartotojas {username} uzregistruotas')
+            messages.success(request, _('Vartotojas {} uzregistruotas').format(username))
             return redirect('index')
     return render(request, 'autoservice/register.html')
 

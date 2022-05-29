@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>{% load static i18n %} {% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -44,6 +44,20 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Prisijungti</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registruotis</a></li>
                         {% endif %}
+                        <li class="nav-item mx-3"> 
+                            <form class="form-inline" action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select class="form-control bg-light text-dark" name="language" onchange="this.form.submit()">
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% for lang in LANGUAGES %}
+                                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected" {% endif %}>
+                                            {{ lang.0 }}: {{ lang.1 }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </form>    
+                        </li>
                         {% endblock navigation %}
                     </ul>
                 </div>

@@ -1,15 +1,16 @@
-{% extends 'C:/Users/User 1/Desktop/Programavimas/Django_autoservisas/autoservice/carservice/templates/autoservice/base.html' %}
+{% extends 'autoservice/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <div class="container">
-    <h1>Automobilių servisas "Neišpjausim katalizatoriaus (galbūt))"</h1>
-    <h4>Šiuo metu turime:</h4>
+    <h1>{% trans 'Automobilių servisas "Neišpjausim katalizatoriaus (galbūt)"'%}</h1>
+    <h4>{% trans "Šiuo metu turime"%}:</h4>
     <ul>
-        <li>Paslaugų: <strong>{{ num_services }}</strong></li>
-        <li>Atliktų užsakymų: <strong>{{ num_orders }}</strong></li>
-        <li>Automobilių servise: <strong>{{ num_cars }}</strong></li>
+        <li>{% trans "Paslaugų"%}: <strong>{{ num_services }}</strong></li>
+        <li>{% trans "Atliktų užsakymų"%}: <strong>{{ num_orders }}</strong></li>
+        <li>{% trans "Automobilių servise"%}: <strong>{{ num_cars }}</strong></li>
     </ul>
-    <p>Čia jūs lankotes {{ num_visits }}-ą kartą.</p>
+    <p>{% trans "Čia jūs lankotes"%} {{ num_visits }}-ą {% trans "kartą"%}.</p>
 <div class="mechanikas"> <img src="{% static 'images/1.jpg' %}" alt="Autoserviso paveikslelis" width="600" height="400"></div>
 </div>
 
