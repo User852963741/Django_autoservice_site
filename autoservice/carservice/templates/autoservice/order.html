@@ -1,0 +1,31 @@
+{% extends 'autoservice/base.html' %}
+{% block content %}
+<div class="container">
+    <h2 >Uzsakymas: {{ order }} </h2>
+    <table class='table table-dark'>
+        <thead>
+            <tr>
+              <th scope="col">Pavadinimas</th>
+              <th scope="col">Kaina</th>
+              <th scope="col">Kiekis</th>
+              <th scope="col">Orderio data</th>
+              <th scope="col">Uzsakovas</th>
+              <th scope="col">Uzsakymo įvykdymo data</th>
+              <th scope="col">Statusas</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for order_line in order.order_lines.all %}
+              <tr>
+              <td class="font-weight-bold font-italic"> {{ order_line.service }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.price }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.quantity }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.order.date }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.order.owner }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.order.due_back }} </td>
+              <td class="font-weight-bold font-italic"> {{ order_line.order.status }} </td>
+            </tr>
+                {% endfor %} 
+    </table>
+</div>
+{% endblock content %} 

@@ -1,0 +1,11 @@
+{% extends 'autoservice/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Šiuo metu turime tokius automobilius:</h1>
+    <ul>
+        {% for car in cars %}
+        <li><a href='{% url "car" car.id %}'><span class="flex-grow-1 font-weight-bold"> {{ car.car_model }} {{ car }}</span></a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %} 

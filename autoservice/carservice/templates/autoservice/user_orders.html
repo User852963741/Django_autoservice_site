@@ -1,0 +1,19 @@
+{% extends "autoservice/base.html" %}
+
+{% block content %}
+    <h1>Mano uzsakymai</h1>
+
+    {% if order_list %}
+    <ul>
+
+      {% for order in order_list %} 
+      <li class="{% if order.is_overdue %}text-danger{% endif %}">
+        <a href="{% url "order" order.pk %}">{{order}}</a> ({{ order.due_back }})        
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Šiuo metu neturi automobilių mūsų autoservise.</p>
+    {% endif %}       
+{% endblock %}

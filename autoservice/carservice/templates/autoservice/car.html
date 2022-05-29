@@ -1,0 +1,19 @@
+{% extends 'autoservice/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <ul class="font-weight-bold font-italic" >
+        <li>Valstybiniai numeriai {{ car.plate_nr }}</li>
+        <li>Modelis {{ car.car_model }}</li>
+        <li>VIN {{ car.vin_code }}</li>
+        <li>Savininkas {{ car.client }}</li>
+        {% if car.picture %}
+            <img src="{{ car.picture.url }}" class="rounded-circle" style="width:35%" alt="...">
+        {% else %}
+            <img src="{% static 'images/missing.jpg' %}" class="card-img-top" style="width:35%">
+        {% endif %}
+        <p>{{ car.description | safe }}</p>
+    </ul>
+</div>
+
+{% endblock content %} 

@@ -1,0 +1,7 @@
+h1 {border-bottom: 3px solid red;}
+h4 {color: blueviolet;}
+.mechanikas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
